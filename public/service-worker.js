@@ -1,41 +1,24 @@
 
-const CACHE_NAME = "static-cache-v2";
-const DATA_CACHE_NAME = "data-cache-v1";
-
-// const FILES_TO_CACHE = [
-//   '/',
-//   '/index.html',
-//   '/index.js',
-//   '/favicon.ico',
-//   '/manifest.webmanifest',
-//   '/styles.css',
-//   '/assets/images/icons/icon-192x192.png',
-//   '/assets/images/icons/icon-512x512.png'
-// ];
-
-const iconSizes = ["192", "512"];
-const iconFiles = iconSizes.map(
-  (size) => `icons/icon-${size}x${size}.png`
-);
-
-const staticFilesToPreCache = [
+const FILES_TO_CACHE = [
   '/',
   '/index.html',
   '/index.js',
+  '/db.js',
   '/favicon.ico',
   '/manifest.webmanifest',
   '/styles.css',
-  '/assets/images/icons/icon-192x192.png',
-  '/assets/images/icons/icon-512x512.png'
-].concat(iconFiles);
+  "https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css",
+  "https://cdn.jsdelivr.net/npm/chart.js@2.8.0"];
 
+const CACHE_NAME = "static-cache-v2";
+const DATA_CACHE_NAME = "data-cache-v1";
 
 // install
 self.addEventListener("install", function(evt) {
   evt.waitUntil(
     caches.open(CACHE_NAME).then(cache => {
       console.log("Your files were pre-cached successfully!");
-      return cache.addAll(staticFilesToPreCache);
+      return cache.addAll(FILES_TO_CACHE);
     })
   );
 
@@ -63,7 +46,7 @@ self.addEventListener("activate", function(evt) {
 // fetch
 self.addEventListener("fetch", function(evt) {
   const {url} = evt.request;
-  if (url.includes("/all") || url.includes("/find")) {
+  if (url.includes("/api/")) {
     evt.respondWith(
       caches.open(DATA_CACHE_NAME).then(cache => {
         return fetch(evt.request)
@@ -79,9 +62,10 @@ self.addEventListener("fetch", function(evt) {
             // Network request failed, try to get it from the cache.
             return cache.match(evt.request);
           });
-      }).catch(err => console.log(err))
+      })
     );
-  } else {
+    return;
+  }
     // respond from static cache, request is not for /api/*
     evt.respondWith(
       caches.open(CACHE_NAME).then(cache => {
@@ -90,5 +74,4 @@ self.addEventListener("fetch", function(evt) {
         });
       })
     );
-  }
 });
