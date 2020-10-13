@@ -2,7 +2,7 @@
 
 ## Description
 For this project, I was provided a working Budget Tracker application. My job was to  
-add offline functionality. When the network is unavaiable, the user can make   
+add offline functionality. When the network is unavailable, the user can make   
 offline deposits and expenses. When the app reconnects to the network,   
 the offline entries are added to the tracker. This app utilized a service-worker.js,   
 a manifest file, and indexDB to create this offline experience.
@@ -15,7 +15,7 @@ a manifest file, and indexDB to create this offline experience.
 * [License](#License)
 * [Author](#Author)
 * [Questions](#Questions)
-* [Acknowledgements](#Acknowledgements )
+* [Acknowledgments](#Acknowledgments )
 
 ## Usage
 To run the app, navigate to your working directory in the integrated terminal and type ```npm start```
@@ -53,7 +53,7 @@ If you have any additional questions you can contact me here:
 GitHub: https://github.com/ericlafontsee   
 elafontsee@gmail.com
 
-## Acknowledgements 
+## Acknowledgments 
 * Public files, server.js, routes, and models provided by Trilogy  
 * Worked on this project with Brendon Conatser
 
