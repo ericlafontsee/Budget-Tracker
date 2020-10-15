@@ -7,6 +7,9 @@ offline deposits and expenses. When the app reconnects to the network,
 the offline entries are added to the tracker. This app utilized a service-worker.js,   
 a manifest file, and indexDB to create this offline experience.
 
+View the deployed application here:
+https://agile-brook-84524.herokuapp.com/
+
 ## Table Of Contents
 * [Usage](#Usage)
 * [Prerequisites](#Prerequisites)
